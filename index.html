@@ -17,6 +17,15 @@
     .card:before{content:"✿";top:18px;left:21px}
     .card:after{content:"❀";right:21px;bottom:18px}
     .screen{position:relative;z-index:1;animation:appear .55s ease both}
+    .intro-screen{min-height:300px;display:flex;flex-direction:column;align-items:center;justify-content:center}
+    .intro-kicker{margin:0 0 13px;color:#a58aa9;font-family:Georgia,"Times New Roman",serif;font-size:13px;letter-spacing:.24em;text-transform:uppercase}
+    .intro-title{margin:0;color:#59445f;font-family:Georgia,"Times New Roman",serif;font-weight:400;font-size:clamp(43px,9vw,64px);line-height:1.05;letter-spacing:-.035em}
+    .intro-rule{display:flex;align-items:center;justify-content:center;gap:12px;width:min(230px,80%);margin:21px auto 18px;color:#c39ab8;font-family:Georgia,serif;font-size:18px}
+    .intro-rule:before,.intro-rule:after{content:"";height:1px;flex:1;background:linear-gradient(90deg,transparent,#d7b8ce)}
+    .intro-rule:after{transform:scaleX(-1)}
+    .intro-note{margin:0 auto 25px!important;font-family:Georgia,"Times New Roman",serif;font-size:17px!important;font-style:italic;letter-spacing:.015em;color:#8e7a91!important}
+    .intro-screen .button-wrap{margin-top:0}
+    .intro-screen .open-button{min-width:142px}
     .hidden{display:none!important}
     #response{position:absolute;left:0;right:0;top:0;height:52px;min-height:52px;display:flex;align-items:center;justify-content:center;max-width:430px;margin:0 auto;line-height:1.5;pointer-events:none}
     #response.hidden{display:flex!important;visibility:hidden}
@@ -41,6 +50,7 @@
     button.dissolve{pointer-events:none;animation:button-dissolve .35s ease forwards;}
     button.dissolve.hidden{display:inline-flex!important;visibility:hidden;animation:none;}
     @keyframes appear{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+    @keyframes cover-open{to{opacity:0;transform:translateY(-5px) scale(.985);filter:blur(2px)}}
     @keyframes petal-drift{0%{transform:translate3d(0,0,0) rotate(var(--rot-start)) scale(.55);opacity:0}10%{opacity:1}25%{opacity:.98}76%{opacity:.85}100%{transform:translate3d(var(--dx),var(--dy),0) rotate(var(--rot-end)) scale(var(--scale));opacity:0}}
     @keyframes card-celebrate-glow{0%,100%{box-shadow:0 26px 70px #72566c2b,0 5px 0 #e2c9dd,inset 0 0 0 5px #fff9fd,inset 0 0 0 6px #e4cddd}35%{box-shadow:0 26px 76px rgba(170,119,177,.23),0 5px 0 #e2c9dd,inset 0 0 0 5px #fff9fd,inset 0 0 0 6px #e4cddd}}
     @keyframes success-arrive{from{opacity:.35}to{opacity:1}}
@@ -52,7 +62,14 @@
 <body>
   <main class="shell">
     <section class="card" id="card">
-      <div class="screen" id="secondScreen">
+      <div class="screen intro-screen" id="introScreen">
+        <p class="intro-kicker">особенное приглашение</p>
+        <h1 class="intro-title">Приглашение</h1>
+        <div class="intro-rule" aria-hidden="true">✧</div>
+        <p class="intro-note">Есть кое-что для тебя…</p>
+        <div class="button-wrap"><button class="open-button" id="openButton">Открыть</button></div>
+      </div>
+      <div class="screen hidden" id="secondScreen">
         <h1 class="question">Варвара, ты придёшь на мой день рождения?</h1>
         <div class="button-wrap"><button id="yesButton">Да, приду</button></div>
         <p id="response" class="hidden" role="status" aria-live="polite" style="margin-top:0;margin-bottom:0">Я буду рад тебя видеть! Я выбираю тебя ❤️</p>
@@ -95,6 +112,16 @@
       card.classList.add('celebrating');
       window.setTimeout(() => card.classList.remove('celebrating'), 2600);
     }
+    document.getElementById('openButton').addEventListener('click', () => {
+      const intro = document.getElementById('introScreen');
+      intro.style.animation = 'cover-open .32s ease forwards';
+      window.setTimeout(() => {
+        intro.classList.add('hidden');
+        const questionScreen = document.getElementById('secondScreen');
+        questionScreen.classList.remove('hidden');
+        questionScreen.style.animation = 'appear .45s ease both';
+      }, 280);
+    });
     document.getElementById('yesButton').addEventListener('click', (event) => {
       const button = event.currentTarget;
       if (button.disabled) return;
