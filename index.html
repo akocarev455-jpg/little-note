@@ -27,7 +27,7 @@
     .intro-screen .button-wrap{margin-top:0}
     .intro-screen .open-button{min-width:142px}
     .hidden{display:none!important}
-    #response{position:absolute;left:0;right:0;top:0;height:52px;min-height:52px;display:flex;align-items:center;justify-content:center;max-width:430px;margin:0 auto;line-height:1.5;pointer-events:none}
+    #response{position:absolute;left:0;right:0;top:0;width:100%;height:52px;min-height:52px;display:flex;align-items:center;justify-content:center;max-width:430px;margin:0 auto;padding:0 6px;font-size:14px;line-height:1.35;pointer-events:none}
     #response.hidden{display:flex!important;visibility:hidden}
     .mark{width:46px;height:46px;margin:0 auto 24px;border:1px solid #d8c8de;border-radius:50%;display:grid;place-items:center;color:var(--accent);font-family:Georgia,serif;font-size:24px}
     h1{margin:0 auto 20px;max-width:480px;font-family:Georgia,"Times New Roman",serif;font-size:clamp(36px,7.5vw,56px);line-height:1.08;letter-spacing:-.035em;font-weight:500;color:#443849}
@@ -71,8 +71,7 @@
       </div>
       <div class="screen hidden" id="secondScreen">
         <h1 class="question">Варвара, ты придёшь на мой день рождения?</h1>
-        <div class="button-wrap"><button id="yesButton">Да, приду</button></div>
-        <p id="response" class="hidden" role="status" aria-live="polite" style="margin-top:0;margin-bottom:0">Я буду рад тебя видеть! Я выбираю тебя ❤️</p>
+        <div class="button-wrap"><button id="yesButton">Да, приду</button><p id="response" class="hidden" role="status" aria-live="polite">Я буду рад тебя видеть! Я выбираю тебя ❤️</p></div>
       </div>
     </section>
     <footer>Сделано специально для тебя</footer>
