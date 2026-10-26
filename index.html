@@ -50,8 +50,8 @@
       </div>
       <div class="screen hidden" id="secondScreen">
         <h1 class="question">Варвара, ты придёшь на мой день рождения?</h1>
-        <div class="button-wrap"><button id="yesButton">Да!</button></div>
-        <p id="response" class="hidden" role="status" aria-live="polite" style="margin-top:24px;margin-bottom:0">Я выбираю тебя ❤️</p>
+        <div class="button-wrap"><button id="yesButton">Да, приду</button></div>
+        <p id="response" class="hidden" role="status" aria-live="polite" style="margin-top:24px;margin-bottom:0">Я буду рад тебя видеть! Я выбираю тебя ❤️</p>
       </div>
     </section>
     <footer>Сделано специально для тебя</footer>
@@ -103,8 +103,7 @@
       if (button.disabled) return;
       button.disabled = true;
       button.setAttribute('aria-pressed', 'true');
-      button.style.cursor = 'default';
-      button.style.opacity = '.82';
+      button.classList.add('hidden');
       response.classList.remove('hidden');
       celebrate();
     });
