@@ -44,9 +44,13 @@
 <body>
   <main class="shell">
     <section class="card" id="card">
-      <div class="screen">
+      <div class="screen" id="firstScreen">
+        <h1>Для тебя есть кое-что особенное</h1>
+        <div class="button-wrap"><button id="openButton">Я выбираю тебя</button></div>
+      </div>
+      <div class="screen hidden" id="secondScreen">
         <h1 class="question">Варвара, ты придёшь на мой день рождения?</h1>
-        <div class="button-wrap"><button id="yesButton">Да, приду</button></div>
+        <div class="button-wrap"><button id="yesButton">Да!</button></div>
         <p id="response" class="hidden" role="status" aria-live="polite" style="margin-top:24px;margin-bottom:0">Буду очень рад тебя видеть.</p>
       </div>
     </section>
@@ -88,11 +92,16 @@
       card.classList.add('glow');
       window.setTimeout(() => card.classList.remove('glow'), 4200);
     }
+    document.getElementById('openButton').addEventListener('click', (event) => {
+      if (event.currentTarget.disabled) return;
+      event.currentTarget.disabled = true;
+      document.getElementById('firstScreen').classList.add('hidden');
+      document.getElementById('secondScreen').classList.remove('hidden');
+    });
     document.getElementById('yesButton').addEventListener('click', (event) => {
       const button = event.currentTarget;
       if (button.disabled) return;
       button.disabled = true;
-      button.textContent = 'Да!';
       button.setAttribute('aria-pressed', 'true');
       button.style.cursor = 'default';
       button.style.opacity = '.82';
