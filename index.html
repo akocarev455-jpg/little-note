@@ -12,7 +12,6 @@
     body{margin:0;min-height:100svh;display:grid;place-items:center;padding:22px;overflow-x:hidden;background:radial-gradient(ellipse at 15% 10%,#ece2f0 0,transparent 38%),radial-gradient(ellipse at 90% 90%,#f1e7ec 0,transparent 35%),#f7f4f7;color:var(--ink);font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif}
     body:before{content:"";position:fixed;inset:0;pointer-events:none;opacity:.25;background-image:radial-gradient(#c8b6ce .7px,transparent .7px);background-size:26px 26px}
     .shell{width:min(100%,610px);position:relative}
-    .topline{text-align:center;margin-bottom:16px;color:#8c7c91;font-size:11px;letter-spacing:.16em;text-transform:uppercase}
     .card{position:relative;overflow:hidden;text-align:center;padding:clamp(32px,7vw,60px) clamp(22px,6vw,54px);border:1px solid #fff;background:rgba(255,253,253,.88);border-radius:28px;box-shadow:0 22px 70px #65506e12,inset 0 0 0 1px #eee6ef;backdrop-filter:blur(12px);transition:box-shadow .5s}
     .card:before,.card:after{content:"";position:absolute;width:100px;height:100px;border:1px solid #d9c9df;border-radius:50%;opacity:.5;pointer-events:none}
     .card:before{top:-62px;left:-48px;box-shadow:0 0 0 12px #d9c9df15,0 0 0 25px #d9c9df10}
@@ -20,22 +19,15 @@
     .screen{position:relative;z-index:1;animation:appear .55s ease both}
     .hidden{display:none!important}
     .mark{width:46px;height:46px;margin:0 auto 24px;border:1px solid #d8c8de;border-radius:50%;display:grid;place-items:center;color:var(--accent);font-family:Georgia,serif;font-size:24px}
-    .eyebrow{margin:0 0 15px;color:var(--accent);font-size:11px;font-weight:650;letter-spacing:.17em;text-transform:uppercase}
     h1{margin:0 auto 20px;max-width:480px;font-family:Georgia,"Times New Roman",serif;font-size:clamp(36px,7.5vw,56px);line-height:1.08;letter-spacing:-.035em;font-weight:500;color:#443849}
     .accent{color:#92769f}
     p{margin:0 auto 23px;max-width:430px;font-size:15px;line-height:1.85;color:var(--muted)}
-    .tiny{font-size:12px;color:#9a8e9e;margin-top:19px;margin-bottom:0}
     .button-wrap{margin-top:29px}
     button{appearance:none;border:1px solid #8e7698;border-radius:999px;padding:15px 27px;min-height:52px;font:inherit;font-size:14px;font-weight:650;color:#fff;background:#8e7698;box-shadow:0 7px 20px #78618420;cursor:pointer;transition:transform .2s,background .2s,box-shadow .2s}
     button:hover{transform:translateY(-2px);background:#796382;box-shadow:0 10px 24px #78618430}
     button:active{transform:scale(.98)}
     button:focus-visible{outline:2px solid #bba8c5;outline-offset:4px}
     .question{font-size:clamp(34px,7vw,49px)}
-    .success{margin-top:26px;padding:25px 18px;border-radius:20px;background:#f7f2f8;border:1px solid #e8dfea;animation:appear .6s ease both}
-    .success .mark{margin-bottom:17px}
-    .success h2{margin:0 0 12px;font-family:Georgia,"Times New Roman",serif;font-size:clamp(27px,5vw,35px);font-weight:500;color:#715b7b}
-    .success p{margin:0;font-size:15px}
-    .signature{margin-top:17px!important;font-size:12px!important;color:#8c7b92!important;letter-spacing:.04em}
     footer{text-align:center;margin-top:16px;color:#9c8d9f;font-size:11px;letter-spacing:.03em}
     .particle{position:fixed;z-index:10;pointer-events:none;top:-24px;width:8px;height:8px;border-radius:50%;background:#c4a9ce;opacity:0;animation:fall linear forwards;will-change:transform,opacity}
     .particle:nth-child(3n){background:#d9b9c8;width:5px;height:5px}
@@ -43,46 +35,24 @@
     .glow{box-shadow:0 0 0 5px #e5d9eb65,0 25px 90px #9d82aa25,inset 0 0 0 1px #eee6ef}
     @keyframes appear{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
     @keyframes fall{0%{transform:translate3d(0,-5vh,0) rotate(0deg);opacity:0}12%{opacity:.85}100%{transform:translate3d(var(--drift),110vh,0) rotate(300deg);opacity:0}}
-    @media(max-width:480px){body{padding:15px}.card{border-radius:23px;padding:34px 21px}.topline{font-size:10px}p{font-size:14px}button{width:100%;max-width:310px}}
+    @media(max-width:480px){body{padding:15px}.card{border-radius:23px;padding:34px 21px}p{font-size:14px}button{width:100%;max-width:310px}}
     @media(prefers-reduced-motion:reduce){*,*:before,*:after{animation-duration:.01ms!important;animation-iteration-count:1!important;scroll-behavior:auto!important;transition-duration:.01ms!important}}
   </style>
 </head>
 <body>
   <main class="shell">
     <section class="card" id="card">
-      <div id="intro" class="screen">
-        <div class="mark" aria-hidden="true">В</div>
-        <p class="eyebrow">Для Варвары</p>
-        <h1>Варвара,<br>это для тебя</h1>
-        <p>Я хочу пригласить тебя на свой день рождения. И если выбирать, с кем разделить этот день, — я выбираю тебя.</p>
-        <div class="button-wrap"><button id="openMessage">Посмотреть приглашение</button></div>
-        <p class="tiny">Личное сообщение</p>
-      </div>
-      <div id="questionScreen" class="screen hidden" aria-live="polite">
-        <div class="mark" aria-hidden="true">В</div>
-        <p class="eyebrow">Приглашение</p>
-        <h1 class="question">Варвара, придёшь на мой день рождения?</h1>
-        <p>Я выбираю тебя — и мне хочется, чтобы ты была рядом в этот день.</p>
+      <div class="screen">
+        <h1 class="question">Варвара, ты придёшь на мой день рождения?</h1>
         <div class="button-wrap"><button id="yesButton">Да, приду</button></div>
-        <p class="tiny">Буду рад твоему ответу.</p>
-        <div id="success" class="success hidden" role="status" aria-live="polite">
-          <div class="mark" aria-hidden="true">✓</div>
-          <h2>Буду рад тебя видеть</h2>
-          <p>Я буду очень рад, если ты придёшь.</p>
-        </div>
+        <p id="response" class="hidden" role="status" aria-live="polite" style="margin-top:24px;margin-bottom:0">Буду очень рад тебя видеть.</p>
       </div>
     </section>
     <footer>Сделано специально для тебя</footer>
   </main>
   <script>
-    const intro = document.getElementById('intro');
-    const questionScreen = document.getElementById('questionScreen');
     const card = document.getElementById('card');
-    const success = document.getElementById('success');
-    document.getElementById('openMessage').addEventListener('click', () => {
-      intro.classList.add('hidden');
-      questionScreen.classList.remove('hidden');
-    });
+    const response = document.getElementById('response');
     function celebrate() {
       for (let i = 0; i < 38; i++) {
         const particle = document.createElement('span');
@@ -98,8 +68,8 @@
       window.setTimeout(() => card.classList.remove('glow'), 1900);
     }
     document.getElementById('yesButton').addEventListener('click', (event) => {
-      event.currentTarget.classList.add('hidden');
-      success.classList.remove('hidden');
+      event.currentTarget.textContent = 'Да!';
+      response.classList.remove('hidden');
       celebrate();
     });
   </script>
