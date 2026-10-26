@@ -31,14 +31,18 @@
     button:focus-visible{outline:2px solid #bba8c5;outline-offset:4px}
     .question{font-size:clamp(34px,7vw,49px)}
     footer{text-align:center;position:relative;z-index:1;margin-top:16px;color:#9c8d9f;font-size:11px;letter-spacing:.03em}
-    .particle{position:fixed;z-index:10;pointer-events:none;top:-24px;width:8px;height:8px;border-radius:50%;background:#c4a9ce;opacity:0;animation:fall linear forwards;will-change:transform,opacity}
-    .lily{position:fixed;z-index:20;left:0;top:0;width:clamp(25px,5vw,46px);height:clamp(25px,5vw,46px);pointer-events:none;will-change:transform,opacity;animation:lily-burst var(--duration) cubic-bezier(.12,.68,.24,1) forwards;filter:drop-shadow(0 3px 5px #8d6a8c30)}
-    .particle:nth-child(3n){background:#d9b9c8;width:5px;height:5px}
-    .particle:nth-child(3n + 1){background:#e4d7e9;width:10px;height:10px}
-    .glow{box-shadow:0 0 0 5px #e5d9eb65,0 25px 90px #9d82aa25,inset 0 0 0 1px #eee6ef}
+    .card .light-wave{position:absolute;inset:-35% -45%;z-index:0;pointer-events:none;opacity:0;transform:translateX(-120%) rotate(12deg);background:linear-gradient(105deg,transparent 36%,rgba(255,255,255,0) 43%,rgba(255,255,255,.78) 49%,rgba(245,220,244,.52) 52%,rgba(255,255,255,0) 59%,transparent 66%);}
+    .card.wave-active .light-wave{animation:light-wave 1.65s cubic-bezier(.2,.65,.25,1) both;}
+    .card.wave-active{animation:card-glow 2.8s ease-out both;}
+    .screen.success{animation:success-arrive .7s cubic-bezier(.2,.7,.2,1) both;}
+    .success-message{color:#886b91;text-shadow:0 0 18px rgba(221,174,218,.45);animation:text-glow 2.6s ease-out both;}
+    button.dissolve{pointer-events:none;animation:button-dissolve .42s ease forwards;}
     @keyframes appear{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
-    @keyframes fall{0%{transform:translate3d(0,-5vh,0) rotate(0deg);opacity:0}12%{opacity:.85}100%{transform:translate3d(var(--drift),110vh,0) rotate(300deg);opacity:0}}
-    @keyframes lily-burst{0%{transform:translate(-50%,-50%) scale(.25) rotate(0deg);opacity:0}12%{opacity:1}72%{opacity:1}100%{transform:translate(calc(-50% + var(--dx)),calc(-50% + var(--dy))) scale(var(--scale)) rotate(var(--rotation));opacity:0}}
+    @keyframes light-wave{0%{opacity:0;transform:translateX(-120%) rotate(12deg)}18%{opacity:1}78%{opacity:.75}100%{opacity:0;transform:translateX(120%) rotate(12deg)}}
+    @keyframes card-glow{0%,100%{box-shadow:0 26px 70px #72566c2b,0 5px 0 #e2c9dd,inset 0 0 0 5px #fff9fd,inset 0 0 0 6px #e4cddd}35%{box-shadow:0 26px 75px rgba(170,119,177,.25),0 5px 0 #e2c9dd,inset 0 0 0 5px #fff9fd,inset 0 0 0 6px #e4cddd}}
+    @keyframes success-arrive{from{opacity:0;transform:translateY(8px) scale(.985);filter:blur(3px)}to{opacity:1;transform:translateY(0) scale(1);filter:blur(0)}}
+    @keyframes text-glow{0%{text-shadow:0 0 0 rgba(221,174,218,0)}35%{text-shadow:0 0 22px rgba(221,174,218,.65)}100%{text-shadow:0 0 12px rgba(221,174,218,.28)}}
+    @keyframes button-dissolve{0%{opacity:1;filter:blur(0);transform:scale(1)}100%{opacity:0;filter:blur(8px);transform:scale(.94)}}
     @media(max-width:480px){body{padding:15px}.card{border-radius:6px 25px 6px 25px;padding:48px 21px}.card:before{top:13px;left:14px;font-size:24px}.card:after{right:14px;bottom:13px;font-size:24px}h1:before{margin-bottom:18px}p{font-size:14px}button{width:100%;max-width:310px}}
     @media(prefers-reduced-motion:reduce){*,*:before,*:after{animation-duration:.01ms!important;animation-iteration-count:1!important;scroll-behavior:auto!important;transition-duration:.01ms!important}}
   </style>
@@ -46,6 +50,7 @@
 <body>
   <main class="shell">
     <section class="card" id="card">
+      <span class="light-wave" aria-hidden="true"></span>
       <div class="screen" id="secondScreen">
         <h1 class="question">Варвара, ты придёшь на мой день рождения?</h1>
         <div class="button-wrap"><button id="yesButton">Да, приду</button></div>
@@ -57,47 +62,20 @@
   <script>
     const card = document.getElementById('card');
     const response = document.getElementById('response');
-    function celebrate() {
-      const button = document.getElementById('yesButton');
-      const rect = button.getBoundingClientRect();
-      const originX = rect.left + rect.width / 2;
-      const originY = rect.top + rect.height / 2;
-      const lilySvg = '<svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><g stroke="#b887a8" stroke-width="1.1" stroke-linejoin="round"><path fill="#fff8fc" d="M32 34C16 31 9 18 17 7c8 7 14 15 15 27Z"/><path fill="#f5dbe9" d="M32 34C24 17 28 5 32 2c5 9 7 20 0 32Z"/><path fill="#fff4fa" d="M32 34C39 16 49 11 56 14c-2 12-11 19-24 20Z"/><path fill="#f1d0e1" d="M32 34C48 29 57 36 58 45c-12 4-21-1-26-11Z"/><path fill="#fff8fc" d="M32 34C38 49 32 58 25 61c-7-10-5-19 7-27Z"/><path fill="#f5dbe9" d="M32 34C19 46 9 43 5 36c7-9 16-10 27-2Z"/></g><path d="M32 32l-8-13m8 13 8-15m-8 15 15-4m-15 4 1 16m-1-16-14 4" stroke="#b18a39" stroke-width="1.5" stroke-linecap="round"/><g fill="#c5a052"><circle cx="24" cy="19" r="1.8"/><circle cx="40" cy="17" r="1.8"/><circle cx="47" cy="28" r="1.8"/><circle cx="33" cy="48" r="1.8"/><circle cx="18" cy="36" r="1.8"/></g><path d="M32 33Q28 43 20 47" fill="none" stroke="#6e9a70" stroke-width="2" stroke-linecap="round"/></svg>';
-      for (let i = 0; i < 220; i++) {
-        const lily = document.createElement('span');
-        lily.className = 'lily';
-        lily.innerHTML = lilySvg;
-        lily.style.left = originX + 'px';
-        lily.style.top = originY + 'px';
-        lily.style.setProperty('--dx', (Math.random() * window.innerWidth * 1.15 - window.innerWidth * .575) + 'px');
-        lily.style.setProperty('--dy', (Math.random() * window.innerHeight * 1.2 - window.innerHeight * .65) + 'px');
-        lily.style.setProperty('--duration', (3.2 + Math.random() * 2.8) + 's');
-        lily.style.setProperty('--scale', (0.55 + Math.random() * 1.05).toFixed(2));
-        lily.style.setProperty('--rotation', (Math.random() * 900 - 450) + 'deg');
-        document.body.appendChild(lily);
-        lily.addEventListener('animationend', () => lily.remove(), {once:true});
-      }
-      for (let i = 0; i < 150; i++) {
-        const particle = document.createElement('span');
-        particle.className = 'particle';
-        particle.style.left = Math.random() * 100 + 'vw';
-        particle.style.animationDuration = (2.8 + Math.random() * 2.8) + 's';
-        particle.style.animationDelay = (Math.random() * .7) + 's';
-        particle.style.setProperty('--drift', (Math.random() * 150 - 75) + 'px');
-        document.body.appendChild(particle);
-        particle.addEventListener('animationend', () => particle.remove(), {once:true});
-      }
-      card.classList.add('glow');
-      window.setTimeout(() => card.classList.remove('glow'), 4200);
-    }
+    const screen = document.getElementById('secondScreen');
     document.getElementById('yesButton').addEventListener('click', (event) => {
       const button = event.currentTarget;
       if (button.disabled) return;
       button.disabled = true;
       button.setAttribute('aria-pressed', 'true');
-      button.classList.add('hidden');
+      button.classList.add('dissolve');
+      card.classList.remove('wave-active');
+      void card.offsetWidth;
+      card.classList.add('wave-active');
+      screen.classList.add('success');
       response.classList.remove('hidden');
-      celebrate();
+      response.classList.add('success-message');
+      button.addEventListener('animationend', () => button.classList.add('hidden'), {once:true});
     });
   </script>
 </body>
