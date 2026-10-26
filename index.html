@@ -30,11 +30,13 @@
     .question{font-size:clamp(34px,7vw,49px)}
     footer{text-align:center;margin-top:16px;color:#9c8d9f;font-size:11px;letter-spacing:.03em}
     .particle{position:fixed;z-index:10;pointer-events:none;top:-24px;width:8px;height:8px;border-radius:50%;background:#c4a9ce;opacity:0;animation:fall linear forwards;will-change:transform,opacity}
+    .lily{position:fixed;z-index:20;left:0;top:0;width:clamp(25px,5vw,46px);height:clamp(25px,5vw,46px);pointer-events:none;will-change:transform,opacity;animation:lily-burst var(--duration) cubic-bezier(.12,.68,.24,1) forwards;filter:drop-shadow(0 3px 5px #8d6a8c30)}
     .particle:nth-child(3n){background:#d9b9c8;width:5px;height:5px}
     .particle:nth-child(3n + 1){background:#e4d7e9;width:10px;height:10px}
     .glow{box-shadow:0 0 0 5px #e5d9eb65,0 25px 90px #9d82aa25,inset 0 0 0 1px #eee6ef}
     @keyframes appear{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
     @keyframes fall{0%{transform:translate3d(0,-5vh,0) rotate(0deg);opacity:0}12%{opacity:.85}100%{transform:translate3d(var(--drift),110vh,0) rotate(300deg);opacity:0}}
+    @keyframes lily-burst{0%{transform:translate(-50%,-50%) scale(.25) rotate(0deg);opacity:0}12%{opacity:1}72%{opacity:1}100%{transform:translate(calc(-50% + var(--dx)),calc(-50% + var(--dy))) scale(var(--scale)) rotate(var(--rotation));opacity:0}}
     @media(max-width:480px){body{padding:15px}.card{border-radius:23px;padding:34px 21px}p{font-size:14px}button{width:100%;max-width:310px}}
     @media(prefers-reduced-motion:reduce){*,*:before,*:after{animation-duration:.01ms!important;animation-iteration-count:1!important;scroll-behavior:auto!important;transition-duration:.01ms!important}}
   </style>
@@ -54,7 +56,26 @@
     const card = document.getElementById('card');
     const response = document.getElementById('response');
     function celebrate() {
-      for (let i = 0; i < 38; i++) {
+      const button = document.getElementById('yesButton');
+      const rect = button.getBoundingClientRect();
+      const originX = rect.left + rect.width / 2;
+      const originY = rect.top + rect.height / 2;
+      const lilySvg = '<svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><g stroke="#b887a8" stroke-width="1.1" stroke-linejoin="round"><path fill="#fff8fc" d="M32 34C16 31 9 18 17 7c8 7 14 15 15 27Z"/><path fill="#f5dbe9" d="M32 34C24 17 28 5 32 2c5 9 7 20 0 32Z"/><path fill="#fff4fa" d="M32 34C39 16 49 11 56 14c-2 12-11 19-24 20Z"/><path fill="#f1d0e1" d="M32 34C48 29 57 36 58 45c-12 4-21-1-26-11Z"/><path fill="#fff8fc" d="M32 34C38 49 32 58 25 61c-7-10-5-19 7-27Z"/><path fill="#f5dbe9" d="M32 34C19 46 9 43 5 36c7-9 16-10 27-2Z"/></g><path d="M32 32l-8-13m8 13 8-15m-8 15 15-4m-15 4 1 16m-1-16-14 4" stroke="#b18a39" stroke-width="1.5" stroke-linecap="round"/><g fill="#c5a052"><circle cx="24" cy="19" r="1.8"/><circle cx="40" cy="17" r="1.8"/><circle cx="47" cy="28" r="1.8"/><circle cx="33" cy="48" r="1.8"/><circle cx="18" cy="36" r="1.8"/></g><path d="M32 33Q28 43 20 47" fill="none" stroke="#6e9a70" stroke-width="2" stroke-linecap="round"/></svg>';
+      for (let i = 0; i < 54; i++) {
+        const lily = document.createElement('span');
+        lily.className = 'lily';
+        lily.innerHTML = lilySvg;
+        lily.style.left = originX + 'px';
+        lily.style.top = originY + 'px';
+        lily.style.setProperty('--dx', (Math.random() * window.innerWidth * 1.15 - window.innerWidth * .575) + 'px');
+        lily.style.setProperty('--dy', (Math.random() * window.innerHeight * 1.2 - window.innerHeight * .65) + 'px');
+        lily.style.setProperty('--duration', (2.1 + Math.random() * 2.2) + 's');
+        lily.style.setProperty('--scale', (0.55 + Math.random() * 1.05).toFixed(2));
+        lily.style.setProperty('--rotation', (Math.random() * 900 - 450) + 'deg');
+        document.body.appendChild(lily);
+        lily.addEventListener('animationend', () => lily.remove(), {once:true});
+      }
+      for (let i = 0; i < 34; i++) {
         const particle = document.createElement('span');
         particle.className = 'particle';
         particle.style.left = Math.random() * 100 + 'vw';
