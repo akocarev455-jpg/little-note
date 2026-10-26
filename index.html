@@ -3,77 +3,77 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#fff1f6">
-  <meta name="description" content="Маленькое приглашение для Варвары 💗">
-  <title>Для Варвары 💗</title>
+  <meta name="theme-color" content="#f6f2f7">
+  <meta name="description" content="Приглашение для Варвары">
+  <title>Для Варвары</title>
   <style>
-    :root{color-scheme:light;--ink:#603d53;--muted:#98768b;--pink:#f28eb5;--rose:#ffbfd3;--cream:#fff9fb;--lilac:#e8d9ff}
+    :root{color-scheme:light;--ink:#403745;--muted:#827785;--accent:#987da8;--line:#e8dfe9;--paper:#fffdfd}
     *{box-sizing:border-box}
-    body{margin:0;min-height:100svh;display:grid;place-items:center;padding:22px;overflow-x:hidden;background:radial-gradient(ellipse at 12% 15%,#ffe0ec 0,transparent 38%),radial-gradient(ellipse at 90% 85%,#eadfff 0,transparent 35%),#fff5f8;color:var(--ink);font-family:ui-rounded,"SF Pro Rounded",system-ui,-apple-system,"Segoe UI",sans-serif}
-    body:before{content:"";position:fixed;inset:0;pointer-events:none;opacity:.42;background-image:radial-gradient(#f4b3cb 1px,transparent 1px);background-size:25px 25px}
-    .shell{width:min(100%,620px);position:relative}
-    .topline{text-align:center;margin-bottom:15px;color:#bd7897;font-size:12px;letter-spacing:.13em;text-transform:uppercase}
-    .card{position:relative;overflow:hidden;text-align:center;padding:clamp(30px,7vw,58px) clamp(22px,6vw,52px);border:1px solid #fff;background:rgba(255,255,255,.78);border-radius:34px;box-shadow:0 25px 80px #d99ab329, inset 0 0 0 1px #f8dce8;backdrop-filter:blur(12px);transition:box-shadow .5s,transform .5s}
-    .card:before,.card:after{content:"♡";position:absolute;color:#f8c6d9;font-size:72px;opacity:.55;pointer-events:none}
-    .card:before{top:7px;left:16px;transform:rotate(-18deg)}.card:after{right:17px;bottom:0;transform:rotate(16deg)}
-    .screen{position:relative;z-index:1;animation:appear .65s cubic-bezier(.2,.8,.2,1) both}
+    body{margin:0;min-height:100svh;display:grid;place-items:center;padding:22px;overflow-x:hidden;background:radial-gradient(ellipse at 15% 10%,#ece2f0 0,transparent 38%),radial-gradient(ellipse at 90% 90%,#f1e7ec 0,transparent 35%),#f7f4f7;color:var(--ink);font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif}
+    body:before{content:"";position:fixed;inset:0;pointer-events:none;opacity:.25;background-image:radial-gradient(#c8b6ce .7px,transparent .7px);background-size:26px 26px}
+    .shell{width:min(100%,610px);position:relative}
+    .topline{text-align:center;margin-bottom:16px;color:#8c7c91;font-size:11px;letter-spacing:.16em;text-transform:uppercase}
+    .card{position:relative;overflow:hidden;text-align:center;padding:clamp(32px,7vw,60px) clamp(22px,6vw,54px);border:1px solid #fff;background:rgba(255,253,253,.88);border-radius:28px;box-shadow:0 22px 70px #65506e12,inset 0 0 0 1px #eee6ef;backdrop-filter:blur(12px);transition:box-shadow .5s}
+    .card:before,.card:after{content:"";position:absolute;width:100px;height:100px;border:1px solid #d9c9df;border-radius:50%;opacity:.5;pointer-events:none}
+    .card:before{top:-62px;left:-48px;box-shadow:0 0 0 12px #d9c9df15,0 0 0 25px #d9c9df10}
+    .card:after{right:-62px;bottom:-65px;box-shadow:0 0 0 12px #d9c9df15,0 0 0 25px #d9c9df10}
+    .screen{position:relative;z-index:1;animation:appear .55s ease both}
     .hidden{display:none!important}
-    .sticker{font-size:48px;line-height:1;margin:0 0 20px;filter:drop-shadow(0 5px 7px #e9a0be40);animation:bob 3s ease-in-out infinite}
-    .eyebrow{margin:0 0 13px;color:#c36d94;font-size:12px;font-weight:750;letter-spacing:.16em;text-transform:uppercase}
-    h1{margin:0 auto 18px;max-width:490px;font-size:clamp(35px,7.5vw,57px);line-height:1.08;letter-spacing:-.045em;font-weight:800;color:#744b68}
-    .pink{color:#e67ca6}
-    p{margin:0 auto 23px;max-width:440px;font-size:16px;line-height:1.8;color:var(--muted)}
-    .tiny{font-size:12px;color:#b58da3;margin-top:20px;margin-bottom:0}
+    .mark{width:46px;height:46px;margin:0 auto 24px;border:1px solid #d8c8de;border-radius:50%;display:grid;place-items:center;color:var(--accent);font-family:Georgia,serif;font-size:24px}
+    .eyebrow{margin:0 0 15px;color:var(--accent);font-size:11px;font-weight:650;letter-spacing:.17em;text-transform:uppercase}
+    h1{margin:0 auto 20px;max-width:480px;font-family:Georgia,"Times New Roman",serif;font-size:clamp(36px,7.5vw,56px);line-height:1.08;letter-spacing:-.035em;font-weight:500;color:#443849}
+    .accent{color:#92769f}
+    p{margin:0 auto 23px;max-width:430px;font-size:15px;line-height:1.85;color:var(--muted)}
+    .tiny{font-size:12px;color:#9a8e9e;margin-top:19px;margin-bottom:0}
     .button-wrap{margin-top:29px}
-    button{appearance:none;border:0;border-radius:999px;padding:16px 26px;min-height:56px;font:inherit;font-weight:800;font-size:15px;color:#fff;background:linear-gradient(115deg,#f18db4,#d79bf1);box-shadow:0 9px 22px #e68db638, inset 0 1px 0 #ffffff80;cursor:pointer;transition:transform .2s,box-shadow .2s;position:relative}
-    button:hover{transform:translateY(-3px) scale(1.025);box-shadow:0 13px 30px #e68db655}
-    button:active{transform:scale(.97)}
-    button:focus-visible{outline:3px solid #9b70b6;outline-offset:4px}
-    .question{font-size:clamp(33px,7vw,50px)}
-    .letter{margin:25px auto 0;padding:17px 18px;max-width:420px;border-radius:20px;background:#fff1f6;border:1px dashed #f0bfd2;color:#a16c88;font-size:14px;line-height:1.7}
-    .success{margin-top:25px;padding:22px 18px;border-radius:23px;background:linear-gradient(135deg,#fff0f6,#f5edff);border:1px solid #f8d4e4;animation:pop .55s cubic-bezier(.2,.8,.2,1) both}
-    .success h2{margin:0 0 9px;font-size:clamp(26px,5vw,36px);color:#d96e9b}
+    button{appearance:none;border:1px solid #8e7698;border-radius:999px;padding:15px 27px;min-height:52px;font:inherit;font-size:14px;font-weight:650;color:#fff;background:#8e7698;box-shadow:0 7px 20px #78618420;cursor:pointer;transition:transform .2s,background .2s,box-shadow .2s}
+    button:hover{transform:translateY(-2px);background:#796382;box-shadow:0 10px 24px #78618430}
+    button:active{transform:scale(.98)}
+    button:focus-visible{outline:2px solid #bba8c5;outline-offset:4px}
+    .question{font-size:clamp(34px,7vw,49px)}
+    .success{margin-top:26px;padding:25px 18px;border-radius:20px;background:#f7f2f8;border:1px solid #e8dfea;animation:appear .6s ease both}
+    .success .mark{margin-bottom:17px}
+    .success h2{margin:0 0 12px;font-family:Georgia,"Times New Roman",serif;font-size:clamp(27px,5vw,35px);font-weight:500;color:#715b7b}
     .success p{margin:0;font-size:15px}
-    .signature{margin-top:19px!important;font-size:13px!important;color:#b27c98!important}
-    footer{text-align:center;margin-top:16px;color:#bd93a9;font-size:11px}
-    .heart{position:fixed;z-index:10;pointer-events:none;top:-40px;animation:fall linear forwards;will-change:transform,opacity}
-    .glow{box-shadow:0 0 0 5px #f9c7db55,0 25px 100px #e78dbb55,inset 0 0 0 1px #f8dce8}
-    @keyframes appear{from{opacity:0;transform:translateY(12px) scale(.985)}to{opacity:1;transform:translateY(0) scale(1)}}
-    @keyframes bob{0%,100%{transform:translateY(0) rotate(-3deg)}50%{transform:translateY(-7px) rotate(3deg)}}
-    @keyframes pop{0%{opacity:0;transform:scale(.85)}70%{transform:scale(1.035)}100%{opacity:1;transform:scale(1)}}
-    @keyframes fall{0%{transform:translate3d(0,-8vh,0) rotate(0deg);opacity:0}10%{opacity:1}100%{transform:translate3d(var(--drift),110vh,0) rotate(620deg);opacity:0}}
-    @media(max-width:480px){body{padding:15px}.card{border-radius:27px;padding:32px 21px}.topline{font-size:10px}p{font-size:15px}button{width:100%;max-width:310px}}
+    .signature{margin-top:17px!important;font-size:12px!important;color:#8c7b92!important;letter-spacing:.04em}
+    footer{text-align:center;margin-top:16px;color:#9c8d9f;font-size:11px;letter-spacing:.03em}
+    .particle{position:fixed;z-index:10;pointer-events:none;top:-24px;width:8px;height:8px;border-radius:50%;background:#c4a9ce;opacity:0;animation:fall linear forwards;will-change:transform,opacity}
+    .particle:nth-child(3n){background:#d9b9c8;width:5px;height:5px}
+    .particle:nth-child(3n + 1){background:#e4d7e9;width:10px;height:10px}
+    .glow{box-shadow:0 0 0 5px #e5d9eb65,0 25px 90px #9d82aa25,inset 0 0 0 1px #eee6ef}
+    @keyframes appear{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+    @keyframes fall{0%{transform:translate3d(0,-5vh,0) rotate(0deg);opacity:0}12%{opacity:.85}100%{transform:translate3d(var(--drift),110vh,0) rotate(300deg);opacity:0}}
+    @media(max-width:480px){body{padding:15px}.card{border-radius:23px;padding:34px 21px}.topline{font-size:10px}p{font-size:14px}button{width:100%;max-width:310px}}
     @media(prefers-reduced-motion:reduce){*,*:before,*:after{animation-duration:.01ms!important;animation-iteration-count:1!important;scroll-behavior:auto!important;transition-duration:.01ms!important}}
   </style>
 </head>
 <body>
   <main class="shell">
-    <div class="topline">✿ маленькое письмо для одного человека ✿</div>
+    <div class="topline">Небольшое приглашение</div>
     <section class="card" id="card">
       <div id="intro" class="screen">
-        <div class="sticker" aria-hidden="true">💌</div>
-        <p class="eyebrow">Открыть только Варваре</p>
-        <h1>Варвара,<br>это <span class="pink">тебе</span> 💗</h1>
-        <p>У меня тут есть один очень важный вопрос. Он маленький, милый и адресован самой прекрасной девушке.</p>
-        <div class="button-wrap"><button id="openMessage">Открыть письмо ♡</button></div>
-        <p class="tiny">осторожно: внутри немного нежности</p>
+        <div class="mark" aria-hidden="true">В</div>
+        <p class="eyebrow">Для Варвары</p>
+        <h1>Варвара,<br>это для тебя</h1>
+        <p>Я хочу пригласить тебя на свой день рождения. Для меня будет особенно приятно провести этот день вместе с тобой.</p>
+        <div class="button-wrap"><button id="openMessage">Посмотреть приглашение</button></div>
+        <p class="tiny">Личное сообщение</p>
       </div>
       <div id="questionScreen" class="screen hidden" aria-live="polite">
-        <div class="sticker" aria-hidden="true">🌷</div>
-        <p class="eyebrow">Вопросик для тебя</p>
-        <h1 class="question">Варвара, будешь моей <span class="pink">любимой гостьей</span> на дне рождения? 🥹</h1>
-        <p>Мне будет намного радостнее, если ты будешь рядом. Хочу провести этот день с тобой и подарить тебе побольше улыбок.</p>
-        <div class="button-wrap"><button id="yesButton">Дааа, конечно! 💗</button></div>
-        <p class="tiny">правильный ответ необязателен… но очень желателен ♡</p>
+        <div class="mark" aria-hidden="true">В</div>
+        <p class="eyebrow">Приглашение</p>
+        <h1 class="question">Варвара, придёшь на мой день рождения?</h1>
+        <p>Мне бы хотелось, чтобы ты была рядом в этот день. Остальные детали расскажу тебе лично.</p>
+        <div class="button-wrap"><button id="yesButton">Да, приду</button></div>
         <div id="success" class="success hidden" role="status" aria-live="polite">
-          <div class="sticker" aria-hidden="true">🥹💖</div>
-          <h2>Урааа, Варвара!</h2>
-          <p>Теперь этот день официально станет ещё лучше. Обнимашки при встрече обязательны, а детали я расскажу тебе лично. Люблю тебя ♡</p>
-          <p class="signature">ты + я + один особенный день ✨</p>
+          <div class="mark" aria-hidden="true">✓</div>
+          <h2>Буду рад тебя видеть</h2>
+          <p>Тогда договорились. Детали обсудим лично. Буду ждать нашей встречи.</p>
+          <p class="signature">До скорого</p>
         </div>
       </div>
     </section>
-    <footer>сделано с нежностью и мыслями о тебе ♡</footer>
+    <footer>Сделано специально для тебя</footer>
   </main>
   <script>
     const intro = document.getElementById('intro');
@@ -85,21 +85,18 @@
       questionScreen.classList.remove('hidden');
     });
     function celebrate() {
-      const symbols = ['💗','💕','💖','♡','✨','🌸','💞'];
-      for (let i = 0; i < 48; i++) {
-        const heart = document.createElement('span');
-        heart.className = 'heart';
-        heart.textContent = symbols[Math.floor(Math.random() * symbols.length)];
-        heart.style.left = Math.random() * 100 + 'vw';
-        heart.style.fontSize = (16 + Math.random() * 22) + 'px';
-        heart.style.animationDuration = (2.6 + Math.random() * 3.2) + 's';
-        heart.style.animationDelay = (Math.random() * .8) + 's';
-        heart.style.setProperty('--drift', (Math.random() * 180 - 90) + 'px');
-        document.body.appendChild(heart);
-        heart.addEventListener('animationend', () => heart.remove(), {once:true});
+      for (let i = 0; i < 38; i++) {
+        const particle = document.createElement('span');
+        particle.className = 'particle';
+        particle.style.left = Math.random() * 100 + 'vw';
+        particle.style.animationDuration = (2.8 + Math.random() * 2.8) + 's';
+        particle.style.animationDelay = (Math.random() * .7) + 's';
+        particle.style.setProperty('--drift', (Math.random() * 150 - 75) + 'px');
+        document.body.appendChild(particle);
+        particle.addEventListener('animationend', () => particle.remove(), {once:true});
       }
       card.classList.add('glow');
-      window.setTimeout(() => card.classList.remove('glow'), 1800);
+      window.setTimeout(() => card.classList.remove('glow'), 1900);
     }
     document.getElementById('yesButton').addEventListener('click', (event) => {
       event.currentTarget.classList.add('hidden');
