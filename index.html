@@ -89,7 +89,13 @@
       window.setTimeout(() => card.classList.remove('glow'), 4200);
     }
     document.getElementById('yesButton').addEventListener('click', (event) => {
-      event.currentTarget.textContent = 'Да!';
+      const button = event.currentTarget;
+      if (button.disabled) return;
+      button.disabled = true;
+      button.textContent = 'Да!';
+      button.setAttribute('aria-pressed', 'true');
+      button.style.cursor = 'default';
+      button.style.opacity = '.82';
       response.classList.remove('hidden');
       celebrate();
     });
