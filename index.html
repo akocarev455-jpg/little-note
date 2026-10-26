@@ -61,7 +61,7 @@
       const originX = rect.left + rect.width / 2;
       const originY = rect.top + rect.height / 2;
       const lilySvg = '<svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><g stroke="#b887a8" stroke-width="1.1" stroke-linejoin="round"><path fill="#fff8fc" d="M32 34C16 31 9 18 17 7c8 7 14 15 15 27Z"/><path fill="#f5dbe9" d="M32 34C24 17 28 5 32 2c5 9 7 20 0 32Z"/><path fill="#fff4fa" d="M32 34C39 16 49 11 56 14c-2 12-11 19-24 20Z"/><path fill="#f1d0e1" d="M32 34C48 29 57 36 58 45c-12 4-21-1-26-11Z"/><path fill="#fff8fc" d="M32 34C38 49 32 58 25 61c-7-10-5-19 7-27Z"/><path fill="#f5dbe9" d="M32 34C19 46 9 43 5 36c7-9 16-10 27-2Z"/></g><path d="M32 32l-8-13m8 13 8-15m-8 15 15-4m-15 4 1 16m-1-16-14 4" stroke="#b18a39" stroke-width="1.5" stroke-linecap="round"/><g fill="#c5a052"><circle cx="24" cy="19" r="1.8"/><circle cx="40" cy="17" r="1.8"/><circle cx="47" cy="28" r="1.8"/><circle cx="33" cy="48" r="1.8"/><circle cx="18" cy="36" r="1.8"/></g><path d="M32 33Q28 43 20 47" fill="none" stroke="#6e9a70" stroke-width="2" stroke-linecap="round"/></svg>';
-      for (let i = 0; i < 54; i++) {
+      for (let i = 0; i < 220; i++) {
         const lily = document.createElement('span');
         lily.className = 'lily';
         lily.innerHTML = lilySvg;
@@ -69,13 +69,13 @@
         lily.style.top = originY + 'px';
         lily.style.setProperty('--dx', (Math.random() * window.innerWidth * 1.15 - window.innerWidth * .575) + 'px');
         lily.style.setProperty('--dy', (Math.random() * window.innerHeight * 1.2 - window.innerHeight * .65) + 'px');
-        lily.style.setProperty('--duration', (2.1 + Math.random() * 2.2) + 's');
+        lily.style.setProperty('--duration', (3.2 + Math.random() * 2.8) + 's');
         lily.style.setProperty('--scale', (0.55 + Math.random() * 1.05).toFixed(2));
         lily.style.setProperty('--rotation', (Math.random() * 900 - 450) + 'deg');
         document.body.appendChild(lily);
         lily.addEventListener('animationend', () => lily.remove(), {once:true});
       }
-      for (let i = 0; i < 34; i++) {
+      for (let i = 0; i < 150; i++) {
         const particle = document.createElement('span');
         particle.className = 'particle';
         particle.style.left = Math.random() * 100 + 'vw';
@@ -86,7 +86,7 @@
         particle.addEventListener('animationend', () => particle.remove(), {once:true});
       }
       card.classList.add('glow');
-      window.setTimeout(() => card.classList.remove('glow'), 1900);
+      window.setTimeout(() => card.classList.remove('glow'), 4200);
     }
     document.getElementById('yesButton').addEventListener('click', (event) => {
       event.currentTarget.textContent = 'Да!';
