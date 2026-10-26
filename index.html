@@ -18,14 +18,14 @@
     .card:after{content:"❀";right:21px;bottom:18px}
     .screen{position:relative;z-index:1;animation:appear .55s ease both}
     .hidden{display:none!important}
-    #response{height:52px;min-height:52px;display:flex;align-items:center;justify-content:center;max-width:430px;margin:0 auto;line-height:1.5}
+    #response{position:absolute;left:0;right:0;top:0;height:52px;min-height:52px;display:flex;align-items:center;justify-content:center;max-width:430px;margin:0 auto;line-height:1.5;pointer-events:none}
     #response.hidden{display:flex!important;visibility:hidden}
     .mark{width:46px;height:46px;margin:0 auto 24px;border:1px solid #d8c8de;border-radius:50%;display:grid;place-items:center;color:var(--accent);font-family:Georgia,serif;font-size:24px}
     h1{margin:0 auto 20px;max-width:480px;font-family:Georgia,"Times New Roman",serif;font-size:clamp(36px,7.5vw,56px);line-height:1.08;letter-spacing:-.035em;font-weight:500;color:#443849}
     h1:before{content:"✧  ❀  ✧";display:block;margin:0 auto 22px;color:#b88da9;font-family:Georgia,serif;font-size:23px;letter-spacing:.18em;font-weight:400}
     .accent{color:#92769f}
     p{margin:0 auto 23px;max-width:430px;font-size:15px;line-height:1.85;color:var(--muted)}
-    .button-wrap{margin-top:29px;height:52px;display:flex;align-items:center;justify-content:center}
+    .button-wrap{margin-top:29px;height:52px;min-height:52px;display:flex;align-items:center;justify-content:center;position:relative}
     button{appearance:none;position:relative;isolation:isolate;overflow:hidden;border:1px solid rgba(255,255,255,.82);border-radius:999px;padding:15px 32px;min-height:52px;font:inherit;font-size:14px;font-weight:650;letter-spacing:.01em;color:#654d69;background:linear-gradient(145deg,rgba(255,255,255,.82),rgba(255,255,255,.35) 45%,rgba(235,215,242,.58));box-shadow:inset 0 1px 1px rgba(255,255,255,.95),inset 0 -1px 2px rgba(167,132,180,.15),0 8px 24px rgba(114,83,126,.13);backdrop-filter:blur(18px) saturate(1.5);-webkit-backdrop-filter:blur(18px) saturate(1.5);cursor:pointer;transition:transform .22s ease,box-shadow .22s ease,background .22s ease}
     button:before{content:"";position:absolute;inset:1px 1px auto;height:48%;border-radius:inherit;background:linear-gradient(180deg,rgba(255,255,255,.75),rgba(255,255,255,0));z-index:-1;pointer-events:none}
     button:hover{transform:translateY(-1px);background:linear-gradient(145deg,rgba(255,255,255,.94),rgba(255,255,255,.48) 45%,rgba(229,205,239,.7));box-shadow:inset 0 1px 1px #fff,inset 0 -1px 2px #a784b426,0 11px 28px #72537e29}
@@ -39,6 +39,7 @@
     .screen.success{animation:success-arrive .35s ease-out both;}
     .success-message{color:#886b91;text-shadow:0 0 14px rgba(221,174,218,.3);}
     button.dissolve{pointer-events:none;animation:button-dissolve .35s ease forwards;}
+    button.dissolve.hidden{display:inline-flex!important;visibility:hidden;animation:none;}
     @keyframes appear{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
     @keyframes petal-drift{0%{transform:translate3d(0,0,0) rotate(var(--rot-start)) scale(.55);opacity:0}10%{opacity:1}25%{opacity:.98}76%{opacity:.85}100%{transform:translate3d(var(--dx),var(--dy),0) rotate(var(--rot-end)) scale(var(--scale));opacity:0}}
     @keyframes card-celebrate-glow{0%,100%{box-shadow:0 26px 70px #72566c2b,0 5px 0 #e2c9dd,inset 0 0 0 5px #fff9fd,inset 0 0 0 6px #e4cddd}35%{box-shadow:0 26px 76px rgba(170,119,177,.23),0 5px 0 #e2c9dd,inset 0 0 0 5px #fff9fd,inset 0 0 0 6px #e4cddd}}
