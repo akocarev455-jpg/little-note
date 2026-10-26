@@ -31,18 +31,15 @@
     button:focus-visible{outline:2px solid #bba8c5;outline-offset:4px}
     .question{font-size:clamp(34px,7vw,49px)}
     footer{text-align:center;position:relative;z-index:1;margin-top:16px;color:#9c8d9f;font-size:11px;letter-spacing:.03em}
-    .card .light-wave{position:absolute;inset:-35% -45%;z-index:0;pointer-events:none;opacity:0;transform:translateX(-120%) rotate(12deg);background:linear-gradient(105deg,transparent 36%,rgba(255,255,255,0) 43%,rgba(255,255,255,.78) 49%,rgba(245,220,244,.52) 52%,rgba(255,255,255,0) 59%,transparent 66%);}
-    .card.wave-active .light-wave{animation:light-wave 1.65s cubic-bezier(.2,.65,.25,1) both;}
-    .card.wave-active{animation:card-glow 2.8s ease-out both;}
-    .screen.success{animation:success-arrive .7s cubic-bezier(.2,.7,.2,1) both;}
-    .success-message{color:#886b91;text-shadow:0 0 18px rgba(221,174,218,.45);animation:text-glow 2.6s ease-out both;}
-    button.dissolve{pointer-events:none;animation:button-dissolve .42s ease forwards;}
+    .sparkle{position:fixed;z-index:8;pointer-events:none;width:var(--size);height:var(--size);left:var(--x);top:var(--y);border-radius:50%;background:rgba(255,255,255,.98);box-shadow:0 0 5px 1px rgba(255,255,255,.9),0 0 12px 3px rgba(220,174,225,.72),0 0 22px 5px rgba(195,157,213,.28);opacity:0;transform:scale(.2);animation:sparkle-twinkle var(--duration) ease-in-out var(--delay) both;}
+    .sparkle:after{content:"";position:absolute;left:50%;top:50%;width:1px;height:calc(var(--size) * 3.8);background:linear-gradient(180deg,transparent,rgba(255,255,255,.95),transparent);transform:translate(-50%,-50%);}
+    .card.sparkle-glow{animation:sparkle-card-glow 2.8s ease-out both;}
     @keyframes appear{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
-    @keyframes light-wave{0%{opacity:0;transform:translateX(-120%) rotate(12deg)}18%{opacity:1}78%{opacity:.75}100%{opacity:0;transform:translateX(120%) rotate(12deg)}}
-    @keyframes card-glow{0%,100%{box-shadow:0 26px 70px #72566c2b,0 5px 0 #e2c9dd,inset 0 0 0 5px #fff9fd,inset 0 0 0 6px #e4cddd}35%{box-shadow:0 26px 75px rgba(170,119,177,.25),0 5px 0 #e2c9dd,inset 0 0 0 5px #fff9fd,inset 0 0 0 6px #e4cddd}}
-    @keyframes success-arrive{from{opacity:0;transform:translateY(8px) scale(.985);filter:blur(3px)}to{opacity:1;transform:translateY(0) scale(1);filter:blur(0)}}
+    @keyframes sparkle-twinkle{0%,100%{opacity:0;transform:scale(.2)}25%{opacity:.95;transform:scale(1)}48%{opacity:.28;transform:scale(.55)}68%{opacity:1;transform:scale(.85)}}
+    @keyframes sparkle-card-glow{0%,100%{box-shadow:0 26px 70px #72566c2b,0 5px 0 #e2c9dd,inset 0 0 0 5px #fff9fd,inset 0 0 0 6px #e4cddd}35%{box-shadow:0 26px 78px rgba(170,119,177,.3),0 5px 0 #e2c9dd,inset 0 0 0 5px #fff9fd,inset 0 0 0 6px #e4cddd}}
+    @keyframes success-arrive{from{opacity:0;transform:translateY(8px) scale(.985);filter:blur(2px)}to{opacity:1;transform:translateY(0) scale(1);filter:blur(0)}}
     @keyframes text-glow{0%{text-shadow:0 0 0 rgba(221,174,218,0)}35%{text-shadow:0 0 22px rgba(221,174,218,.65)}100%{text-shadow:0 0 12px rgba(221,174,218,.28)}}
-    @keyframes button-dissolve{0%{opacity:1;filter:blur(0);transform:scale(1)}100%{opacity:0;filter:blur(8px);transform:scale(.94)}}
+    @keyframes button-dissolve{0%{opacity:1;filter:blur(0);transform:scale(1)}100%{opacity:0;filter:blur(6px);transform:scale(.96)}}
     @media(max-width:480px){body{padding:15px}.card{border-radius:6px 25px 6px 25px;padding:48px 21px}.card:before{top:13px;left:14px;font-size:24px}.card:after{right:14px;bottom:13px;font-size:24px}h1:before{margin-bottom:18px}p{font-size:14px}button{width:100%;max-width:310px}}
     @media(prefers-reduced-motion:reduce){*,*:before,*:after{animation-duration:.01ms!important;animation-iteration-count:1!important;scroll-behavior:auto!important;transition-duration:.01ms!important}}
   </style>
@@ -50,7 +47,6 @@
 <body>
   <main class="shell">
     <section class="card" id="card">
-      <span class="light-wave" aria-hidden="true"></span>
       <div class="screen" id="secondScreen">
         <h1 class="question">Варвара, ты придёшь на мой день рождения?</h1>
         <div class="button-wrap"><button id="yesButton">Да, приду</button></div>
@@ -63,19 +59,44 @@
     const card = document.getElementById('card');
     const response = document.getElementById('response');
     const screen = document.getElementById('secondScreen');
+    function sparkleAroundCard() {
+      const rect = card.getBoundingClientRect();
+      const pad = 26;
+      const positions = [];
+      for (let i = 0; i < 17; i++) {
+        const side = i % 4;
+        let x, y;
+        if (side === 0) { x = rect.left - pad + Math.random() * (rect.width + pad * 2); y = rect.top - 8 - Math.random() * 20; }
+        else if (side === 1) { x = rect.right + 8 + Math.random() * 20; y = rect.top - pad + Math.random() * (rect.height + pad * 2); }
+        else if (side === 2) { x = rect.left - pad + Math.random() * (rect.width + pad * 2); y = rect.bottom + 8 + Math.random() * 20; }
+        else { x = rect.left - 8 - Math.random() * 20; y = rect.top - pad + Math.random() * (rect.height + pad * 2); }
+        positions.push({x:Math.max(4,Math.min(innerWidth - 4,x)),y:Math.max(4,Math.min(innerHeight - 4,y))});
+      }
+      positions.forEach((p) => {
+        const sparkle = document.createElement('span');
+        sparkle.className = 'sparkle';
+        sparkle.style.setProperty('--x', p.x + 'px');
+        sparkle.style.setProperty('--y', p.y + 'px');
+        sparkle.style.setProperty('--size', (2 + Math.random() * 3) + 'px');
+        sparkle.style.setProperty('--duration', (1.3 + Math.random() * 1.2) + 's');
+        sparkle.style.setProperty('--delay', (Math.random() * .55) + 's');
+        document.body.appendChild(sparkle);
+        sparkle.addEventListener('animationend', () => sparkle.remove(), {once:true});
+      });
+      card.classList.add('sparkle-glow');
+      window.setTimeout(() => card.classList.remove('sparkle-glow'), 2900);
+    }
     document.getElementById('yesButton').addEventListener('click', (event) => {
       const button = event.currentTarget;
       if (button.disabled) return;
       button.disabled = true;
       button.setAttribute('aria-pressed', 'true');
       button.classList.add('dissolve');
-      card.classList.remove('wave-active');
-      void card.offsetWidth;
-      card.classList.add('wave-active');
       screen.classList.add('success');
       response.classList.remove('hidden');
       response.classList.add('success-message');
       button.addEventListener('animationend', () => button.classList.add('hidden'), {once:true});
+      sparkleAroundCard();
     });
   </script>
 </body>
